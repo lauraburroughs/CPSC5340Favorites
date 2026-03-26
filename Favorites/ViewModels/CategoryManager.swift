@@ -37,6 +37,7 @@ class CategoryManager<T: Favoritable> {
             }
         }
     }
+  
     
     func loadFavoriteIds() -> [Int] {
         return UserDefaults.standard.array(forKey: storageKey) as? [Int] ?? []

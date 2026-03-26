@@ -29,7 +29,7 @@ struct BookCardView: View {
                 }) {
             
                     Image(systemName: book.isFavorite ? "heart.fill" : "heart")
-                        .foregroundColor(book.isFavorite ? .red : .gray)
+                        .foregroundColor(book.isFavorite ? .red : .black)
                         }
                     }
             .padding(.vertical, 6)
