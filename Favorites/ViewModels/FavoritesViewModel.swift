@@ -28,25 +28,58 @@ class FavoritesViewModel : ObservableObject {
     }
     
     
+    func favoriteCities(searchText: String) -> [CityModel] {
+        cities.filter { city in
+                city.isFavorite &&
+                (searchText.isEmpty ||
+                 city.searchableText.lowercased().contains(searchText.lowercased()))
+            }
+        }
+    
+    func favoriteHobbies(searchText: String) -> [HobbyModel] {
+        hobbies.filter { hobby in
+                hobby.isFavorite &&
+                (searchText.isEmpty ||
+                 hobby.searchableText.lowercased().contains(searchText.lowercased()))
+            }
+        }
+    
+    func favoriteBooks(searchText: String) -> [BookModel] {
+        books.filter { book in
+                book.isFavorite &&
+                (searchText.isEmpty ||
+                 book.searchableText.lowercased().contains(searchText.lowercased()))
+            }
+        }
+    
     func filteredCities(searchText: String) -> [CityModel] {
-        cityManager.filteredItems(items: cities, searchText: searchText)
+        cities.filter { city in
+            (searchText.isEmpty ||
+             city.searchableText.lowercased().contains(searchText.lowercased()))
+        }
+    }
+    
+    func filteredHobbies(searchText: String) -> [HobbyModel] {
+        hobbies.filter { hobby in
+            (searchText.isEmpty ||
+             hobby.searchableText.lowercased().contains(searchText.lowercased()))
+        }
+    }
+    
+    func filteredBooks(searchText: String) -> [BookModel] {
+        books.filter { book in
+            (searchText.isEmpty ||
+             book.searchableText.lowercased().contains(searchText.lowercased()))
+        }
     }
     
     func toggleFavoriteCity(city: CityModel) {
         cityManager.toggleFavorite(items: &cities, targetItem: city)
     }
     
-    func filteredHobbies(searchText: String) -> [HobbyModel] {
-        hobbyManager.filteredItems(items: hobbies, searchText: searchText)
-    }
-    
     func toggleFavoriteHobby(hobby: HobbyModel) {
         hobbyManager.toggleFavorite(items: &hobbies, targetItem: hobby)
         }
-    
-    func filteredBooks(searchText: String) -> [BookModel] {
-        bookManager.filteredItems(items: books, searchText: searchText)
-    }
     
     func toggleFavoriteBook(book: BookModel) {
         bookManager.toggleFavorite(items: &books, targetItem: book)

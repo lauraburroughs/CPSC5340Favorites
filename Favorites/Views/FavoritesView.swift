@@ -11,38 +11,80 @@ struct FavoritesView: View {
     
     @EnvironmentObject var favorites: FavoritesViewModel
     @State private var searchText = ""
+
     
     var body: some View {
         NavigationView {
             List {
                 
-                if !favorites.filteredCities(searchText: searchText).isEmpty {
-                    Section("Cities") {
-                        ForEach(favorites.filteredCities(searchText: searchText)) { city in Text(city.cityName)
-                        }
-                    }
-                }
-                
-                if !favorites.filteredHobbies(searchText: searchText).isEmpty {
-                    Section("Hobbies") {
-                        ForEach(favorites.filteredHobbies(searchText: searchText)) { hobby in Text(hobby.hobbyName)
-                        }
-                    }
-                }
-                
+                let cities = favorites.favoriteCities(searchText: searchText)
+                let hobbies = favorites.favoriteHobbies(searchText: searchText)
+                let books = favorites.favoriteBooks(searchText: searchText)
 
-                if !favorites.filteredCities(searchText: searchText).isEmpty {
-                    Section("Books") {
-                        ForEach(favorites.filteredBooks(searchText: searchText)) { book in Text(book.bookTitle)
+                
+                if !cities.isEmpty {
+                    Section("Cities") {
+                        ForEach(cities) { city in
+                            HStack {
+                                Text(city.cityName)
+                                Spacer()
+                                Button {
+                                    favorites.toggleFavoriteCity(city: city)
+                                } label: {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundColor(.red)
+                                }
+                            }
                         }
                     }
                 }
+                
+                if !hobbies.isEmpty {
+                    Section("Hobbies") {
+                        ForEach(hobbies) { hobby in
+                            HStack {
+                                Text(hobby.hobbyName)
+                                Spacer()
+                                Button {
+                                    favorites.toggleFavoriteHobby(hobby: hobby)
+                                } label: {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundColor(.red)
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                    if !books.isEmpty {
+                        Section("Books") {
+                            ForEach(books) { book in
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(book.bookTitle)
+                                        Text(book.bookAuthor)
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Spacer()
+                                    Button {
+                                        favorites.toggleFavoriteBook(book: book)
+                                        } label: {
+                                            Image(systemName: "heart.fill")
+                                                .foregroundColor(.red)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .navigationTitle("Favorites")
+            
             }
-            .navigationTitle("Favorites")
         }
     }
-}
 
+                
 #Preview {
     FavoritesView()
 }
