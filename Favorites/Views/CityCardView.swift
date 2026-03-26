@@ -12,11 +12,7 @@ struct CityCardView: View {
     let city : CityModel
     @EnvironmentObject private var favorites : FavoritesViewModel
     
-    
-    
-    
-    
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
             Image(city.cityImage)
@@ -35,7 +31,7 @@ struct CityCardView: View {
                 Spacer()
             
                 Button(action: {
-                    print("Tapped for \(city.cityName)")
+                    favorites.toggleFavoriteCity(city: city)
                 }) {
                     Image(systemName: city.isFavorite ? "heart.fill" : "heart")
                         .padding(6)

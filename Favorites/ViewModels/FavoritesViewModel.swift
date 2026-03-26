@@ -16,6 +16,12 @@ class FavoritesViewModel : ObservableObject {
     @Published var hobbies: [HobbyModel] = sampleHobbies
     @Published var books: [BookModel] = sampleBooks
     
+    init() {
+        loadFavoriteCities()
+    }
+    
+    
+    
     func filteredCities(searchText: String) -> [CityModel] {
         if searchText.isEmpty {
             return cities
@@ -26,6 +32,30 @@ class FavoritesViewModel : ObservableObject {
         }
     }
     
+    func toggleFavoriteCity(city: CityModel) {
+        if let index = cities.firstIndex(where: { $0.id == city.id}) {
+            cities[index].isFavorite.toggle()
+            saveFavoriteCities()
+        }
+    }
+    
+    func saveFavoriteCities() {
+        let favoriteCities = cities.filter({ $0.isFavorite}).map { $0.id }
+        UserDefaults.standard.set(favoriteCities, forKey: "favoriteCities")
+    }
+    
+    func loadFavoriteCities() {
+        if let favoriteCityIds = UserDefaults.standard.array(forKey: "favoriteCities") as? [Int] {
+            for index in cities.indices {
+                cities[index].isFavorite = favoriteCityIds.contains(cities[index].id)
+            }
+        }
+    }
+    
+    
+    
+    
+
 
 }
 
