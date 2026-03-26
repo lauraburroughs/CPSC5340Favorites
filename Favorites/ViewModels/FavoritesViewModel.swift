@@ -16,6 +16,15 @@ class FavoritesViewModel : ObservableObject {
     @Published var hobbies: [HobbyModel] = sampleHobbies
     @Published var books: [BookModel] = sampleBooks
     
+    func filteredCities(searchText: String) -> [CityModel] {
+        if searchText.isEmpty {
+            return cities
+        } else {
+            return cities.filter {
+                $0.cityName.lowercased().contains(searchText.lowercased())
+            }
+        }
+    }
     
 
 }
