@@ -1,28 +1,23 @@
 ![alt text](https://github.com/ajariwala1/Favorites/blob/main/Docs/banner_au.png?raw=true)
 
+# Favorites App
 
-:stop_sign: `Incomplete` <br/>
-:bangbang: `Skeleton Project`
-
-# Favorites
-
-Use a three-tab layout to explore cities, hobbies, and books. On the Home tab, show categories using custom views. Cities appear as cards with background images and text, while hobbies are listed with SF Symbol icons.
-Allow users to favorite items with a heart button. Track favorites locally and view them in the Favorites tab. In the Settings tab, provide options to switch dark/light mode and clear all favorites. <br/>
-This is a skeleton project that includes all assets you need to build the application.
+The Favorites App is an iOS application built with SwiftUI that allows users to browse and manage their favorite items across three categories: Cities, Hobbies, and Books. Users can mark items as favorites, view them in a dedicated Favorites tab, and remove them directly from that view. The app uses a shared ViewModel to ensure that all changes remain synchronized across the interface.</p>
+This app was built based on skeleton code from CPSC 5340. It was developed as part of coursework to demonstrate understanding of SwiftUI, MVVM architecture, and state management across multiple views.<br/>
 
 ## Getting Started
 
-Clone the project and see the lecture videos on Canvas under Module 8 for instructions. <br/>
-See the completed Favorites application here: <br/>
-https://github.com/ajariwala1/Favorites_Completed
+Clone the repository: git clone https://github.com/your-username/CPSC5340Favorites.git
 
-## What you will learn
+Open the project in Xcode: open Favorites.xcodeproj
 
-- Use of TabView with multiple tabs to organize app features.
-- Create custom SwiftUI views for cards and list rows.
-- Implement @State and @ObservedObject for reactive UI updates.
-- Manage shared app state using a FavoritesViewModel with the MVVM pattern.
-- Use UserDefaults for persistent local storage of favorite selections.
-- Toggle favorite status on button tap and update the UI accordingly.
-- Implement light/dark mode switching in the app.
-- Clear saved data and reset application state through a Settings view.
+Build and run the app using the iOS Simulator or a connected device.<br/>
+
+## Key Concepts and Features
+- SwiftUI data flow using @StateObject and @EnvironmentObject
+- Protocol-oriented design with Favoritable
+- Generic data management using a category manager
+- Real-time UI updates using @Published
+- Separation of concerns through MVVM architecture
+- Favorites are saved using a category-based storage manager
+- Data persists between app launches
